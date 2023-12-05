@@ -9,8 +9,9 @@ node {
     sh 'docker exec node npm --version'
     sh 'docker exec node ls -la'
     sh 'docker exec node npm ci'
-    sh 'docker exec node npm run build'
-    sh 'echo "YOUR COMMANDS HERE!"'
+    sh 'echo "FROM nginx:latest" > Dockerfile'
+    sh 'echo "COPY . /usr/share/nginx/html" >> Dockerfile'
+    sh 'docker build -t my-nginx-image .'
     sh 'docker kill node'
   }
   stage('Cleanup') {
