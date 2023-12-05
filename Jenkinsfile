@@ -1,7 +1,7 @@
 node {
   stage('Checkout') {
     // Use the Git plugin to checkout the code
-    git branch: 'master', url: 'https://github.com/0xfabio/jenkins-react-app.git'
+    git branch: 'master', url: 'https://github.com/marcoruz/jenkins-react-app.git'
   }
   stage('Build') {
     sh 'docker ps --filter name=node | grep node && docker kill node || true'
@@ -9,6 +9,7 @@ node {
     sh 'docker exec node npm --version'
     sh 'docker exec node ls -la'
     sh 'docker exec node npm ci'
+    sh 'docker exec node run build'
     sh 'echo "YOUR COMMANDS HERE!"'
     sh 'docker kill node'
   }
